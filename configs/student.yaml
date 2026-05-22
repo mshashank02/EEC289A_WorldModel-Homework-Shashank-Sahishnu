@@ -11,7 +11,7 @@ training:
   batch_size: 128
   updates: 3600
   smoke_updates: 120
-  train_sequence_length: 64
+  train_sequence_length: 80
   learning_rate: 5.0e-4
   grad_clip_norm: 10.0
   eval_every: 200
@@ -22,7 +22,7 @@ training:
   checkpoint_mode: max
 
 loss:
-  one_step_weight: 1.0
+  one_step_weight: 1.2
   rollout_weight: 0.7
   rollout_train_horizon: 20
 
