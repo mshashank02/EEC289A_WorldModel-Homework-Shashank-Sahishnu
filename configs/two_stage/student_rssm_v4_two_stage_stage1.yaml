@@ -1,0 +1,45 @@
+seed: 289
+device: auto
+torch_num_threads: 1
+model:
+  hidden_dim: 256
+  num_layers: 3
+  use_gru: true
+training:
+  batch_size: 128
+  updates: 2400
+  smoke_updates: 120
+  train_sequence_length: 80
+  learning_rate: 0.0005
+  grad_clip_norm: 10.0
+  eval_every: 200
+  smoke_eval_every: 20
+  val_horizon: 200
+  max_val_windows: 128
+  checkpoint_metric: val/nMSE_AUC
+  checkpoint_mode: min
+loss:
+  one_step_weight: 1.0
+  rollout_weight: 0.8
+  rollout_train_horizon: 30
+  kl_weight: 1.0e-05
+  rollout_discount_gamma: 0.98
+  rollout_horizon_schedule: []
+  rollout_weight_schedule: []
+eval:
+  warmup_steps: 10
+  horizon: auto
+  max_horizon: 1000
+  report_horizons:
+  - 1
+  - 5
+  - 10
+  - 90
+  - 100
+  - 200
+  - 500
+  - 1000
+  vpt_thresholds:
+  - 0.1
+  - 0.25
+  - 0.5
