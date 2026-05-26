@@ -1,0 +1,64 @@
+seed: 73
+device: auto
+torch_num_threads: 1
+
+model:
+  hidden_dim: 256
+  num_layers: 3
+  use_gru: true
+
+training:
+  batch_size: 128
+  updates: 4800
+  smoke_updates: 120
+  train_sequence_length: 90
+  learning_rate: 0.0005
+  grad_clip_norm: 10.0
+  eval_every: 200
+  smoke_eval_every: 20
+  val_horizon: 1000
+  max_val_windows: 256
+  checkpoint_metric: val/VPT80@0.25
+  checkpoint_mode: max
+
+loss:
+  one_step_weight: 1.15
+  rollout_weight: 0.8
+  rollout_train_horizon: 50
+  rollout_train_horizons: [20, 35, 50]
+  rollout_discount_gamma: 0.995
+
+  vpt_threshold: 0.25
+  vpt_band_width: 0.20
+  vpt_band_temperature: 0.04
+  vpt_band_weight: 0.75
+  vpt_survival_weight: 0.25
+
+  x_weight: 0.75
+  theta_weight: 2.0
+  x_dot_weight: 1.0
+  theta_dot_weight: 1.5
+
+eval:
+  warmup_steps: 10
+  horizon: auto
+  max_horizon: 1000
+  report_horizons:
+    - 1
+    - 5
+    - 10
+    - 20
+    - 25
+    - 30
+    - 40
+    - 50
+    - 75
+    - 90
+    - 100
+    - 200
+    - 500
+    - 1000
+  vpt_thresholds:
+    - 0.1
+    - 0.25
+    - 0.5
